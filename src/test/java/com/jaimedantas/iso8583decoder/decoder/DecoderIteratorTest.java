@@ -1,5 +1,6 @@
 package com.jaimedantas.iso8583decoder.decoder;
 
+import com.jaimedantas.iso8583decoder.exception.DecodeException;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;
@@ -39,7 +40,7 @@ public class DecoderIteratorTest {
 
     final Throwable throwable = catchThrowable(() -> decodeIterator.next());
 
-    assertThat(throwable).isInstanceOf(NoSuchElementException.class);
+    assertThat(throwable).isInstanceOf(DecodeException.class);
 
   }
 

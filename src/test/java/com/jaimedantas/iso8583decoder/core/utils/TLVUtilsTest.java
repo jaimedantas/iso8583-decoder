@@ -8,30 +8,26 @@ import org.junit.Test;
 
 public class TLVUtilsTest {
 
-  /**
-   * This entire test set was copied from https://github.com/mvallim/emv-qrcode
-   */
-
   @Test
-  public void testSuccessValueOfTag() {
+  public void shouldSuccessValueOfTag() {
     assertThat(TLVUtils.valueOfTag("01070103100"), equalTo("01"));
     assertThat(TLVUtils.valueOfTag("XXXX01070103100", 4), equalTo("01"));
   }
 
   @Test
-  public void testSuccessValueOfLength() {
+  public void shouldSuccessValueOfLength() {
     assertThat(TLVUtils.valueOfLength("01070103100"), equalTo(7));
     assertThat(TLVUtils.valueOfLength("XXXX01070103100", 4), equalTo(7));
   }
 
   @Test
-  public void testSuccessValueOf() {
+  public void shouldSuccessValueOf() {
     assertThat(TLVUtils.valueOf("01070103100"), equalTo("0103100"));
     assertThat(TLVUtils.valueOf("XXXX01070103100", 4), equalTo("0103100"));
   }
 
   @Test
-  public void testSuccessChunk() {
+  public void shouldSuccessChunk() {
     assertThat(TLVUtils.chunk("01070103100", 0), equalTo("01070103100"));
     assertThat(TLVUtils.chunk("01070103100020512345", 11), equalTo("020512345"));
   }

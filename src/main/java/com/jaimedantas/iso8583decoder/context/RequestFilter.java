@@ -13,6 +13,8 @@ import java.util.UUID;
 
 @Component
 public class RequestFilter extends OncePerRequestFilter {
+
+    public static final String CORRELATION_ID = "CorrelationId";
     
     /**
      * Adds an the transaction id of the request in the context and removes afterwards
@@ -24,11 +26,11 @@ public class RequestFilter extends OncePerRequestFilter {
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        MDC.put("CorrelationId", getCorrelationId());
+        MDC.put(CORRELATION_ID, getCorrelationId());
         try {
             filterChain.doFilter(request, response);
         } finally {
-            MDC.remove("CorrelationId");
+            MDC.remove(CORRELATION_ID);
         }
     }
 
