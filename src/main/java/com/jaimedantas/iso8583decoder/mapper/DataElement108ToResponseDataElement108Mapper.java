@@ -3,21 +3,21 @@ package com.jaimedantas.iso8583decoder.mapper;
 import com.jaimedantas.iso8583decoder.model.iso8583.DataElement108;
 import com.jaimedantas.iso8583decoder.model.message.AccountInformation;
 import com.jaimedantas.iso8583decoder.model.message.ReferenceData;
-import com.jaimedantas.iso8583decoder.model.message.Response;
+import com.jaimedantas.iso8583decoder.model.message.ResponseSingleTransaction;
 import com.jaimedantas.iso8583decoder.model.message.enums.FundingSource;
 import com.jaimedantas.iso8583decoder.model.message.enums.TransactionPurpose;
 
 import java.util.Objects;
 
 
-public class DataElement108ToResponseMapper implements Mapper {
+public class DataElement108ToResponseDataElement108Mapper implements DataElement108Mapper {
 
     @Override
-    public Response dataElement108ToResponse(DataElement108 dataElement108) {
+    public ResponseSingleTransaction dataElement108ToResponse(DataElement108 dataElement108) {
         if (dataElement108 == null){
             return null;
         }
-        Response response = new Response();
+        ResponseSingleTransaction response = new ResponseSingleTransaction();
         AccountInformation accountInformationSender = new AccountInformation();
         AccountInformation accountInformationReceiver = new AccountInformation();
         ReferenceData referenceData = new ReferenceData();

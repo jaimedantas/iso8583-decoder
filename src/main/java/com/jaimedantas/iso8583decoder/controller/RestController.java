@@ -1,6 +1,7 @@
 package com.jaimedantas.iso8583decoder.controller;
 
 import com.jaimedantas.iso8583decoder.exception.DecodeException;
+import com.jaimedantas.iso8583decoder.model.message.ResponseSingleTransaction;
 import com.jaimedantas.iso8583decoder.processor.ProcessDataElement108;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,6 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping(path="/decoder/de108")
@@ -31,6 +36,19 @@ public class RestController {
         logger.info("Received request id {}", MDC.get("CorrelationId"));
 
         ResponseEntity<?> response =  processor.process(dataElement108);
+
+        logger.info("Processed request id {}", MDC.get("CorrelationId"));
+
+        return response;
+    }
+
+    @ApiOperation("Decodes a txt file with multiple Data Elements 108 in each line")
+    @PostMapping(path="/file", produces = "application/json")
+    public ResponseEntity<ArrayList<ResponseSingleTransaction>> decodeDataElement108File (@RequestParam MultipartFile dataElement108File) throws DecodeException, IOException {
+
+        logger.info("Received request id {}", MDC.get("CorrelationId"));
+
+        ResponseEntity<ArrayList<ResponseSingleTransaction>> response =  processor.processFile(dataElement108File);
 
         logger.info("Processed request id {}", MDC.get("CorrelationId"));
 

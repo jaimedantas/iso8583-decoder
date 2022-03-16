@@ -3,7 +3,7 @@ package com.jaimedantas.iso8583decoder.mapper;
 import com.jaimedantas.iso8583decoder.decoder.Decoder;
 import com.jaimedantas.iso8583decoder.exception.DecodeException;
 import com.jaimedantas.iso8583decoder.model.iso8583.DataElement108;
-import com.jaimedantas.iso8583decoder.model.message.Response;
+import com.jaimedantas.iso8583decoder.model.message.ResponseSingleTransaction;
 import org.junit.Test;
 
 import java.util.Objects;
@@ -12,9 +12,9 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class DataElement108ToResponseMapperTest {
+public class DataElement108ToResponseSingleTransactionDataElement108MapperTest {
 
-    DataElement108ToResponseMapper mapper = new DataElement108ToResponseMapper();
+    DataElement108ToResponseDataElement108Mapper mapper = new DataElement108ToResponseDataElement108Mapper();
 
     @Test
     public void shouldBuildResponseObjectFromStringDe108() throws DecodeException {
@@ -23,7 +23,7 @@ public class DataElement108ToResponseMapperTest {
 
         //when
         final DataElement108 dataElement108 = Decoder.decode(encodeDe108, DataElement108.class);
-        Response response = mapper.dataElement108ToResponse(dataElement108);
+        ResponseSingleTransaction response = mapper.dataElement108ToResponse(dataElement108);
 
         //then
         assertThat(response.getReceiver().getFirst(), equalTo("EMMA"));
@@ -52,7 +52,7 @@ public class DataElement108ToResponseMapperTest {
 
         //when
         final DataElement108 dataElement108 = Decoder.decode(encodeDe108, DataElement108.class);
-        Response response = mapper.dataElement108ToResponse(dataElement108);
+        ResponseSingleTransaction response = mapper.dataElement108ToResponse(dataElement108);
 
         //then
         assertThat(response.getReceiver().getFirst(), equalTo("EMMA"));
@@ -79,7 +79,7 @@ public class DataElement108ToResponseMapperTest {
 
         //when
         final DataElement108 dataElement108 = Decoder.decode(encodeDe108, DataElement108.class);
-        Response response = mapper.dataElement108ToResponse(dataElement108);
+        ResponseSingleTransaction response = mapper.dataElement108ToResponse(dataElement108);
 
         //then
         assertThat(response.getReceiver().getFirst(), equalTo("EMMA"));
@@ -106,7 +106,7 @@ public class DataElement108ToResponseMapperTest {
 
         //when
         final DataElement108 dataElement108 = Decoder.decode(encodeDe108, DataElement108.class);
-        Response response = mapper.dataElement108ToResponse(dataElement108);
+        ResponseSingleTransaction response = mapper.dataElement108ToResponse(dataElement108);
 
         //then
         assertTrue(Objects.isNull(response));
