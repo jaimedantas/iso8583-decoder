@@ -8,12 +8,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TagLengthStringTest {
 
-  /**
-   * This entire test set was copied from https://github.com/mvallim/emv-qrcode
-   */
 
   @Test
-  public void testSuccessToString() {
+  public void shouldSuccessToString() {
     final TagLengthString tagLengthString = new TagLengthString();
 
     tagLengthString.setTag("02");
@@ -24,7 +21,7 @@ public class TagLengthStringTest {
   }
 
   @Test
-  public void testSuccessToStringWhenValueIsNull() {
+  public void shouldSuccessToStringWhenValueIsNull() {
     final TagLengthString tagLengthString = new TagLengthString();
 
     tagLengthString.setTag("02");
@@ -34,7 +31,7 @@ public class TagLengthStringTest {
   }
 
   @Test
-  public void testSuccessToStringWhenValueIsEmpty() {
+  public void shouldSuccessToStringWhenValueIsEmpty() {
     final TagLengthString tagLengthString = new TagLengthString();
 
     tagLengthString.setTag("02");

@@ -9,14 +9,14 @@ public class DataElement108LengthValidator  extends AbstractValidator<Request> {
 
     @Override
     public void rules() {
-        ruleFor("LLLVAR_DE108", Request::getRequest)
-                .must(this::checkSizeeOfDataElement108)
+        ruleFor("LLLVAR_DE108", Request::getClientRequest)
+                .must(this::checkSizeOfDataElement108)
                     .withMessage("Length of data element 108 is wrong")
-                    .withAttempedValue(of(Request::getRequest))
+                    .withAttempedValue(of(Request::getClientRequest))
                     .critical();
     }
 
-    private boolean checkSizeeOfDataElement108(final String request) {
+    private boolean checkSizeOfDataElement108(final String request) {
         return Integer.parseInt(request.substring(0,3)) == request.length()-3;
     }
 

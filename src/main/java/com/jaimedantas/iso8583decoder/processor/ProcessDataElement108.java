@@ -3,7 +3,9 @@ package com.jaimedantas.iso8583decoder.processor;
 import br.com.fluentvalidator.Validator;
 import br.com.fluentvalidator.context.ValidationResult;
 import com.jaimedantas.iso8583decoder.decoder.Decoder;
+import com.jaimedantas.iso8583decoder.exception.BadRequestException;
 import com.jaimedantas.iso8583decoder.exception.DecodeException;
+import com.jaimedantas.iso8583decoder.exception.UnprocessableEntityException;
 import com.jaimedantas.iso8583decoder.mapper.DataElement108ToResponseDataElement108Mapper;
 import com.jaimedantas.iso8583decoder.model.iso8583.DataElement108;
 import com.jaimedantas.iso8583decoder.model.iso8583.TransactionReferenceDataTemplate;
@@ -23,20 +25,22 @@ import java.util.Objects;
 public class ProcessDataElement108 {
 
     /**
-     * Executes the complete parse of the raw string of DE 108 to the Contract of the API
-     * @param input
+     * Executes the complete parse and validation of the raw string of DE 108 to the Contract of the API
+     * @param input request from client
      * @return
      * @throws DecodeException
+     * @throws BadRequestException
+     * @throws UnprocessableEntityException
      */
-    public ResponseEntity<?> process(String input) throws DecodeException {
-        //validation
+    public ResponseEntity<ResponseSingleTransaction> process(String input) throws DecodeException, BadRequestException, UnprocessableEntityException {
+
         final Request request = new Request();
-        request.setRequest(input);
+        request.setClientRequest(input);
         final Validator<Request> validatorRequest = new DataElement108LengthValidator();
         final ValidationResult validationRequestResult = validatorRequest.validate(request);
 
         if (!validationRequestResult.isValid()){
-            return ResponseEntity.badRequest().body(validationRequestResult.getErrors());
+            throw new BadRequestException(validationRequestResult);
         }
 
         final DataElement108 dataElement108 = Decoder.decode(input.substring(3), DataElement108.class);
@@ -44,7 +48,7 @@ public class ProcessDataElement108 {
         final ValidationResult validationDataElementResult = validatorDataElement108.validate(dataElement108.getTransactionReferenceDataTemplate());
 
         if (!validationDataElementResult.isValid()) {
-            return ResponseEntity.unprocessableEntity().body(validationDataElementResult.getErrors());
+            throw new UnprocessableEntityException(validationDataElementResult);
         }
 
         DataElement108ToResponseDataElement108Mapper mapper = new DataElement108ToResponseDataElement108Mapper();
@@ -54,8 +58,14 @@ public class ProcessDataElement108 {
 
     }
 
+    /**
+     * Processes the file input from client
+     * @param input
+     * @return
+     * @throws DecodeException
+     */
     @SneakyThrows
-    public ResponseEntity<ArrayList<ResponseSingleTransaction>> processFile(MultipartFile input) throws DecodeException {
+    public ResponseEntity<ArrayList<ResponseSingleTransaction>> processFile(MultipartFile input) {
 
         String k = new String(input.getBytes());
         String[] parts = k.split("\n");
@@ -70,11 +80,17 @@ public class ProcessDataElement108 {
         return ResponseEntity.ok().body(arrayList);
     }
 
+    /**
+     * Parses each transaction from file
+     * @param transaction
+     * @return
+     * @throws DecodeException
+     */
     private ResponseSingleTransaction parseTransaction(String transaction) throws DecodeException {
 
         //validation
         final Request request = new Request();
-        request.setRequest(transaction);
+        request.setClientRequest(transaction);
         final Validator<Request> validatorRequest = new DataElement108LengthValidator();
         final ValidationResult validationRequestResult = validatorRequest.validate(request);
 

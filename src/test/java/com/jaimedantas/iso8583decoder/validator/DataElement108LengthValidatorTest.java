@@ -16,7 +16,7 @@ public class DataElement108LengthValidatorTest {
         final String encoded = "14701600104EMMA0207ANTHONY0306VAUGHN0507MACHIAS0602VI1110174609308702630106BRENDA0209ANNABELLE0307MCGUIRE0505DATIL0602MO111012544681890312030203050204";
         //when
         final Request request = new Request();
-        request.setRequest(encoded);
+        request.setClientRequest(encoded);
         final Validator<Request> validatorRequest = new DataElement108LengthValidator();
         final ValidationResult validationResult = validatorRequest.validate(request);
         //then
@@ -28,7 +28,7 @@ public class DataElement108LengthValidatorTest {
         final String encoded = "14601600104EMMA0207ANTHONY0306VAUGHN0507MACHIAS0602VI1110174609308702630106BRENDA0209ANNABELLE0307MCGUIRE0505DATIL0602MO111012544681890312030203050204";
 
         final Request request = new Request();
-        request.setRequest(encoded);
+        request.setClientRequest(encoded);
         final Validator<Request> validatorRequest = new DataElement108LengthValidator();
         final ValidationResult validationResult = validatorRequest.validate(request);
 
