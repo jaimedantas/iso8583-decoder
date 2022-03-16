@@ -1,18 +1,17 @@
 package com.jaimedantas.iso8583decoder.configuration;
 
-import com.jaimedantas.iso8583decoder.core.mpm.TagLengthString;
+import com.jaimedantas.iso8583decoder.core.map.TagLengthString;
 import com.jaimedantas.iso8583decoder.decoder.*;
-import com.jaimedantas.iso8583decoder.model.*;
+import com.jaimedantas.iso8583decoder.model.iso8583.*;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public final class DecodersMpmMap {
+public final class DecodersMap {
 
-    private static final Map<Class<?>, Class<? extends DecoderMpm<?>>> MAP_DECODERS = new ConcurrentHashMap<>();
+    private static final Map<Class<?>, Class<? extends Decoder<?>>> MAP_DECODERS = new ConcurrentHashMap<>();
 
     static {
-        MAP_DECODERS.put(String.class, StringDecoder.class);
         MAP_DECODERS.put(TagLengthString.class, TagLengthStringDecoder.class);
         MAP_DECODERS.put(DataElement108.class, DataElement108Decoder.class);
         MAP_DECODERS.put(AccountHolder.class, AccountHolderDecoder.class);
@@ -22,12 +21,9 @@ public final class DecodersMpmMap {
         MAP_DECODERS.put(TransactionReferenceDataTemplate.class, TransactionReferenceDataTemplateDecoder.class);
     }
 
-    private DecodersMpmMap() {
-        super();
-    }
-
-    public static Class<? extends DecoderMpm<?>> getDecoder(final Class<?> clazz) {
+    public static Class<? extends Decoder<?>> getDecoder(final Class<?> clazz) {
         return MAP_DECODERS.get(clazz);
     }
 
+    private DecodersMap(){}
 }

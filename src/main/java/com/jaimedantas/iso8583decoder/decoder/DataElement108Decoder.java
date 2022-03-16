@@ -1,14 +1,15 @@
 package com.jaimedantas.iso8583decoder.decoder;
 
 import com.jaimedantas.iso8583decoder.core.ultils.TLVUtils;
-import com.jaimedantas.iso8583decoder.model.*;
-import com.jaimedantas.iso8583decoder.model.constants.DataElement108Tags;
+import com.jaimedantas.iso8583decoder.exception.DecodeException;
+import com.jaimedantas.iso8583decoder.model.iso8583.*;
+import com.jaimedantas.iso8583decoder.model.iso8583.constants.*;
 
 import java.util.*;
 import java.util.function.BiConsumer;
 
 
-public final class DataElement108Decoder extends DecoderMpm<DataElement108>{
+public final class DataElement108Decoder extends Decoder<DataElement108> {
 
     private static final Map<String, Map.Entry<Class<?>, BiConsumer<DataElement108, ?>>> mapConsumers = new HashMap<>();
 
@@ -24,28 +25,17 @@ public final class DataElement108Decoder extends DecoderMpm<DataElement108>{
 
     @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    protected DataElement108 decode() throws IllegalArgumentException {
-
-        final Set<String> tags = new HashSet<>();
+    protected DataElement108 decode() throws DecodeException {
 
         final DataElement108 result = new DataElement108();
 
         while(iterator.hasNext()) {
             final String value = iterator.next();
-
             final String tag = TLVUtils.valueOfTag(value);
-
-            final String derivateId = tag;
-
-            tags.add(tag);
-
-            final Map.Entry<Class<?>, BiConsumer<DataElement108, ?>> entry = mapConsumers.get(derivateId);
-
+            final Map.Entry<Class<?>, BiConsumer<DataElement108, ?>> entry = mapConsumers.get(tag);
             final Class<?> clazz = entry.getKey();
-
             final BiConsumer consumer = entry.getValue();
-
-            consumer.accept(result, DecoderMpm.decode(value, clazz));
+            consumer.accept(result, Decoder.decode(value, clazz));
         }
 
         return result;

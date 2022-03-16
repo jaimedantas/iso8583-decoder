@@ -1,7 +1,7 @@
-package com.jaimedantas.iso8583decoder.model;
+package com.jaimedantas.iso8583decoder.model.iso8583;
 
 import com.jaimedantas.iso8583decoder.core.TLV;
-import com.jaimedantas.iso8583decoder.model.constants.DataElement108Tags;
+import com.jaimedantas.iso8583decoder.model.iso8583.constants.DataElement108Tags;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 

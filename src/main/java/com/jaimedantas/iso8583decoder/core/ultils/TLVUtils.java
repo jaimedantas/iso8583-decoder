@@ -10,37 +10,37 @@ public final class TLVUtils {
     super();
   }
 
-  public static final String valueOfTag(final String source) {
+  public static String valueOfTag(final String source) {
     return valueOfTag(source, 0);
   }
 
-  public static final String valueOfTag(final String source, final Integer from) {
+  public static String valueOfTag(final String source, final Integer from) {
     final Integer start = from;
     final Integer end = start + ID_WORD_COUNT;
     return source.substring(start, end);
   }
 
-  public static final Integer valueOfLength(final String source) {
+  public static Integer valueOfLength(final String source) {
     return valueOfLength(source, 0);
   }
 
-  public static final Integer valueOfLength(final String source, final Integer from) {
+  public static Integer valueOfLength(final String source, final Integer from) {
     final Integer start = from + ID_WORD_COUNT;
     final Integer end = start + VALUE_LENGTH_WORD_COUNT;
     return Integer.valueOf(source.substring(start, end));
   }
 
-  public static final String valueOf(final String source) {
+  public static String valueOf(final String source) {
     return valueOf(source, 0);
   }
 
-  public static final String valueOf(final String source, final Integer from) {
+  public static String valueOf(final String source, final Integer from) {
     final Integer start = from + ID_WORD_COUNT + VALUE_LENGTH_WORD_COUNT;
     final Integer end = start + valueOfLength(source, from);
     return source.substring(start, end);
   }
 
-  public static final String chunk(final String source, final Integer from) {
+  public static String chunk(final String source, final Integer from) {
     final Integer start = from + ID_WORD_COUNT + VALUE_LENGTH_WORD_COUNT;
     final Integer end = start + valueOfLength(source, from);
     return source.substring(from, end);

@@ -1,13 +1,15 @@
-package com.jaimedantas.iso8583decoder.model;
+package com.jaimedantas.iso8583decoder.model.iso8583;
 
 import com.jaimedantas.iso8583decoder.core.TLV;
-import com.jaimedantas.iso8583decoder.model.constants.DataElement108Tags;
+import com.jaimedantas.iso8583decoder.model.iso8583.constants.DataElement108Tags;
+import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 
 @Setter
+@Getter
 public class AccountHolderReceiverTemplate implements TLV<String, AccountHolder> {
 
     private static final long serialVersionUID = 3820564336190396179L;
@@ -17,11 +19,6 @@ public class AccountHolderReceiverTemplate implements TLV<String, AccountHolder>
     @Override
     public String getTag() {
         return DataElement108Tags.RECEIVER_DATA;
-    }
-
-    @Override
-    public AccountHolder getValue() {
-        return value;
     }
 
     @Override

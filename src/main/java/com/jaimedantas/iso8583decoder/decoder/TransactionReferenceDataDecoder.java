@@ -1,18 +1,16 @@
 package com.jaimedantas.iso8583decoder.decoder;
 
-
-import com.jaimedantas.iso8583decoder.core.mpm.TagLengthString;
+import com.jaimedantas.iso8583decoder.core.map.TagLengthString;
 import com.jaimedantas.iso8583decoder.core.ultils.TLVUtils;
-import com.jaimedantas.iso8583decoder.model.TransactionReferenceData;
-import com.jaimedantas.iso8583decoder.model.constants.TransactionReferenceDataTags;
+import com.jaimedantas.iso8583decoder.exception.DecodeException;
+import com.jaimedantas.iso8583decoder.model.iso8583.TransactionReferenceData;
+import com.jaimedantas.iso8583decoder.model.iso8583.constants.TransactionReferenceDataTags;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.BiConsumer;
 
-public final class TransactionReferenceDataDecoder extends DecoderMpm<TransactionReferenceData> {
+public final class TransactionReferenceDataDecoder extends Decoder<TransactionReferenceData> {
     private static final Map<String, Map.Entry<Class<?>, BiConsumer<TransactionReferenceData, ?>>> mapConsumers = new HashMap<>();
 
     static {
@@ -26,28 +24,17 @@ public final class TransactionReferenceDataDecoder extends DecoderMpm<Transactio
 
     @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    protected TransactionReferenceData decode() throws IllegalArgumentException {
-
-        final Set<String> tags = new HashSet<>();
+    protected TransactionReferenceData decode() throws DecodeException {
 
         final TransactionReferenceData result = new TransactionReferenceData();
 
         while(iterator.hasNext()) {
             final String value = iterator.next();
-
             final String tag = TLVUtils.valueOfTag(value);
-
-
-            tags.add(tag);
-
             final Map.Entry<Class<?>, BiConsumer<TransactionReferenceData, ?>> entry = mapConsumers.get(tag);
-
-
             final Class<?> clazz = entry.getKey();
-
             final BiConsumer consumer = entry.getValue();
-
-            consumer.accept(result, DecoderMpm.decode(value, clazz));
+            consumer.accept(result, Decoder.decode(value, clazz));
         }
 
         return result;

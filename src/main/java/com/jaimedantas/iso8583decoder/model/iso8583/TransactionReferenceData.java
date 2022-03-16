@@ -1,6 +1,6 @@
-package com.jaimedantas.iso8583decoder.model;
+package com.jaimedantas.iso8583decoder.model.iso8583;
 
-import com.jaimedantas.iso8583decoder.core.mpm.TagLengthString;
+import com.jaimedantas.iso8583decoder.core.map.TagLengthString;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,15 +1,15 @@
 package com.jaimedantas.iso8583decoder.decoder;
 
-import com.jaimedantas.iso8583decoder.core.mpm.TagLengthString;
+import com.jaimedantas.iso8583decoder.core.map.TagLengthString;
 import com.jaimedantas.iso8583decoder.core.ultils.TLVUtils;
-import com.jaimedantas.iso8583decoder.model.AccountHolder;
-import com.jaimedantas.iso8583decoder.model.constants.AccountHolderTags;
-
+import com.jaimedantas.iso8583decoder.exception.DecodeException;
+import com.jaimedantas.iso8583decoder.model.iso8583.AccountHolder;
+import com.jaimedantas.iso8583decoder.model.iso8583.constants.AccountHolderTags;
 import java.util.*;
 import java.util.function.BiConsumer;
 
 
-public final class AccountHolderDecoder extends DecoderMpm<AccountHolder>{
+public final class AccountHolderDecoder extends Decoder<AccountHolder> {
 
     private static final Map<String, Map.Entry<Class<?>, BiConsumer<AccountHolder, ?>>> mapConsumers = new HashMap<>();
 
@@ -28,28 +28,17 @@ public final class AccountHolderDecoder extends DecoderMpm<AccountHolder>{
 
     @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    protected AccountHolder decode() throws IllegalArgumentException {
-
-        final Set<String> tags = new HashSet<>();
+    protected AccountHolder decode() throws DecodeException {
 
         final AccountHolder result = new AccountHolder();
 
         while(iterator.hasNext()) {
             final String value = iterator.next();
-
             final String tag = TLVUtils.valueOfTag(value);
-
-
-            tags.add(tag);
-
             final Map.Entry<Class<?>, BiConsumer<AccountHolder, ?>> entry = mapConsumers.get(tag);
-
-
             final Class<?> clazz = entry.getKey();
-
             final BiConsumer consumer = entry.getValue();
-
-            consumer.accept(result, DecoderMpm.decode(value, clazz));
+            consumer.accept(result, Decoder.decode(value, clazz));
         }
 
         return result;

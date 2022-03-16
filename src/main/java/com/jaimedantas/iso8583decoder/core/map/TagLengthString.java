@@ -1,35 +1,23 @@
-package com.jaimedantas.iso8583decoder.core.mpm;
+package com.jaimedantas.iso8583decoder.core.map;
 
 import com.jaimedantas.iso8583decoder.core.TLV;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
 @Setter
+@Getter
+@AllArgsConstructor
 public class TagLengthString implements TLV<String, String> {
 
-  private static final long serialVersionUID = -6482977134879939277L;
+  private static final long serialVersionUID = -5164041778566004362L;
 
   private String tag;
-
   private String value;
 
   public TagLengthString() {
     super();
-  }
-
-  public TagLengthString(final String tag, final String value) {
-    this.tag = tag;
-    this.value = value;
-  }
-
-  @Override
-  public String getTag() {
-    return tag;
-  }
-
-  @Override
-  public String getValue() {
-    return value;
   }
 
   @Override

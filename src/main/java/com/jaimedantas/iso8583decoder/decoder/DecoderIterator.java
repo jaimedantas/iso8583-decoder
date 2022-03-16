@@ -1,21 +1,19 @@
 package com.jaimedantas.iso8583decoder.decoder;
 
 import com.jaimedantas.iso8583decoder.core.ultils.TLVUtils;
+import com.jaimedantas.iso8583decoder.exception.DecodeException;
+import lombok.SneakyThrows;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
-// @formatter:off
-final class DecodeMpmIterator implements Iterator<String> {
+final class DecoderIterator implements Iterator<String> {
 
   private Integer current;
-
   private final Integer max;
-
   private final String source;
 
-  public DecodeMpmIterator(final String source) {
+  public DecoderIterator(final String source) {
     current = 0;
     max = source.length();
     this.source = source;
@@ -40,11 +38,12 @@ final class DecodeMpmIterator implements Iterator<String> {
     }
   }
 
+  @SneakyThrows
   @Override
   public String next() {
 
     if(!hasNext()){
-      throw new NoSuchElementException();
+      throw new DecodeException("No such element");
     }
 
     final String value = TLVUtils.chunk(source, current);
@@ -55,4 +54,3 @@ final class DecodeMpmIterator implements Iterator<String> {
   }
 
 }
-// @formatter:on

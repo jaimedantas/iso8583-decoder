@@ -1,22 +1,22 @@
 package com.jaimedantas.iso8583decoder.decoder;
 
+import com.jaimedantas.iso8583decoder.exception.DecodeException;
+import com.jaimedantas.iso8583decoder.model.iso8583.TransactionReferenceData;
+import com.jaimedantas.iso8583decoder.model.iso8583.TransactionReferenceDataTemplate;
 
-import com.jaimedantas.iso8583decoder.model.TransactionReferenceData;
-import com.jaimedantas.iso8583decoder.model.TransactionReferenceDataTemplate;
-
-public class TransactionReferenceDataTemplateDecoder extends DecoderMpm<TransactionReferenceDataTemplate>{
+public class TransactionReferenceDataTemplateDecoder extends Decoder<TransactionReferenceDataTemplate> {
 
     public TransactionReferenceDataTemplateDecoder(final String source) {
         super(source);
     }
 
     @Override
-    protected TransactionReferenceDataTemplate decode() throws IllegalArgumentException {
+    protected TransactionReferenceDataTemplate decode() throws DecodeException {
         final TransactionReferenceDataTemplate result = new TransactionReferenceDataTemplate();
 
         while(iterator.hasNext()) {
             final String value = iterator.next();
-            result.setValue(DecoderMpm.decode(value, TransactionReferenceData.class));
+            result.setValue(Decoder.decode(value, TransactionReferenceData.class));
         }
 
         return result;

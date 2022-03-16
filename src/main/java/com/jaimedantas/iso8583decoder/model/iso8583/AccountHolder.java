@@ -1,17 +1,17 @@
-package com.jaimedantas.iso8583decoder.model;
+package com.jaimedantas.iso8583decoder.model.iso8583;
 
-import com.jaimedantas.iso8583decoder.core.mpm.TagLengthString;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jaimedantas.iso8583decoder.core.map.TagLengthString;
+import lombok.Data;
 
 import java.io.Serializable;
 
-@Setter
-@Getter
+@Data
 public class AccountHolder implements Serializable {
 
     private static final long serialVersionUID = -7468210501969513049L;
 
+    @JsonProperty("first")
     private TagLengthString firstName;
     private TagLengthString middleName;
     private TagLengthString lastName;
