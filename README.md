@@ -1,9 +1,9 @@
 # ISO 8583 Decoder
 ISO 8583 Decoder is a microservice with two APIs for decoding the Data Element 108 of the ISO 8583 specification. This service is current 
-running [here](https://9dhajsauof.execute-api.ca-central-1.amazonaws.com/swagger-ui.html). Feel free to test this API using web interface 
+running [here](https://9dhajsauof.execute-api.ca-central-1.amazonaws.com/swagger-ui.html). Feel free to test this API using the web interface 
 provided.
 
-## Languages and frameworks
+## Languages and Frameworks
 - Java 11
 - Spring Boot Framework 2.5.2
 - Lombok
@@ -15,15 +15,12 @@ provided.
 
 ## Documentation
 The documentation for the ISO 8583 Decoder is available online through the Swagger interface 
-[here](https://9dhajsauof.execute-api.ca-central-1.amazonaws.com/swagger-ui.html). Below you can find details on how you can buuld and run this 
+[here](https://9dhajsauof.execute-api.ca-central-1.amazonaws.com/swagger-ui.html). Below you can find details on how you can build and run this 
 microservice locally.
 
 ## Introduction
 The ISO 8583 Decoder is a message decoder for the ISO 8383 protocol. Currently, it only supports the data element 108. However, 
-developers can extend this application to process other data elements. 
-
-### Challenge
-The ISO 8583 Decoder is capable of decoding LLLVAR data elements encoded with TLV (Tag-Length-Value).  
+developers can extend this application to process other data elements. It is capable of decoding LLLVAR data elements encoded with TLV (Tag-Length-Value).  
 
 ## System Design
 ISO 8583 Decoder is a Java microservice built using the Spring boot web framework. I used the [Java Fluent Validator](https://github.com/mvallim/java-fluent-validator)
@@ -48,9 +45,20 @@ Now that we have the docker image, let’s run the application. To do so, use th
 ````shell
  docker run -p iso8583-decoder 
 ````
-After a few seconds, open your web browser to (http://localhost:8080/swagger-ui.html)[http://localhost:8080/swagger-ui.html]. 
-You should see the Iso8583 Decoder Swagger interface and start to play with it.
+After a few seconds, open your web browser to [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html). 
+You should see the ISO 8583 Decoder Swagger interface and start to play with it.
 
+### Maven
+Open a terminal and go to the `app` directory and run:
+````shell
+mvn clean package
+````
+Now that we have the `jar` package, let’s run the application. To do so, use the `java` run command inside the `target` folder:
+````shell
+java -jar iso8583-decoder-0.0.1-SNAPSHOT.jar
+````
+After a few seconds, open your web browser to [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html).
+You should see the ISO 8583 Decoder Swagger interface and start to play with it.
 
 ## APIs
 There are two endpoints from chose from. The first one is the `/decoder/de108/file` which is used to upload a `TXT` file with multiple transaction
