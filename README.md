@@ -46,7 +46,7 @@ Now that we have the docker image, let’s run the application. To do so, use th
  docker run -p iso8583-decoder 
 ````
 After a few seconds, open your web browser to [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html). 
-You should see the ISO 8583 Decoder Swagger interface and start to play with it.
+You should be able to see the ISO 8583 Decoder Swagger interface and start to play with it.
 
 ### Maven
 Open a terminal and go to the `app` directory and run:
@@ -58,12 +58,13 @@ Now that we have the `jar` package, let’s run the application. To do so, use t
 java -jar iso8583-decoder-0.0.1-SNAPSHOT.jar
 ````
 After a few seconds, open your web browser to [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html).
-You should see the ISO 8583 Decoder Swagger interface and start to play with it.
+You should  be able to see the ISO 8583 Decoder Swagger interface and start to play with it.
 
 ## APIs
-There are two endpoints from chose from. The first one is the `/decoder/de108/file` which is used to upload a `TXT` file with multiple transaction
-to the server. The output is a `JSON` response with the parsed data elements. The second APIs receives a single transaction as a 
-parameter and outputs the `JSON` representation. Here you can use the web interface to try out the endpoints. 
+There are two endpoints from you chose from. The first one is the `/decoder/de108/file` which is used to upload a `TXT` file with multiple transaction
+to the server. The output is a `JSON` response with the parsed data elements. The second API receives a single transaction as a 
+parameter and outputs its `JSON` representation. Here you can use the web interface to try out the endpoints. 
+
 ![](doc/web.png)
 
 ### Single Transaction
@@ -116,7 +117,7 @@ This microservice was deployed on AWS and it is currently runing on the followin
 ```shell
 https://9dhajsauof.execute-api.ca-central-1.amazonaws.com
 ```
-For the accesing the WEB interface, you can go to:
+For accessing the WEB interface, you can go to:
 ```shell
 https://9dhajsauof.execute-api.ca-central-1.amazonaws.com/swagger-ui.html
 ```
