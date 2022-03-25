@@ -10,6 +10,7 @@ ISO 8583 Decoder is a microservice with two APIs for decoding the Data Element 1
 
 ## Libraries
 - [Java Fluent Validator](https://github.com/mvallim/java-fluent-validator)
+- [EMV QR Code](https://github.com/mvallim/emv-qrcode)
 
 ## Documentation
 The documentation for the ISO 8583 Decoder is available online through the Swagger interface at [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html). Below you can find details on how you can build and run this 
