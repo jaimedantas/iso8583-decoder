@@ -1,5 +1,5 @@
 # ISO 8583 Decoder
-ISO 8583 Decoder is a microservice with two APIs for decoding the Data Element 108 of the ISO 8583 specification. 
+ISO 8583 Decoder is a microservice with two APIs for decoding the Data Element 108 of the ISO 8583 specification.
 
 ## Languages and Frameworks
 - Java 11
@@ -13,12 +13,12 @@ ISO 8583 Decoder is a microservice with two APIs for decoding the Data Element 1
 - [EMV QR Code](https://github.com/mvallim/emv-qrcode)
 
 ## Documentation
-The documentation for the ISO 8583 Decoder is available online through the Swagger interface at [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html). Below you can find details on how you can build and run this 
+The documentation for the ISO 8583 Decoder is available online through the Swagger interface at [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html). Below you can find details on how you can build and run this
 microservice locally.
 
 ## Introduction
-The ISO 8583 Decoder is a message decoder for the ISO 8383 protocol. Currently, it only supports data element 108. However, 
-developers can extend this application to process other data elements. It is capable of decoding LLLVAR data elements encoded with TLV (Tag-Length-Value).  
+The ISO 8583 Decoder is a message decoder for the ISO 8383 protocol. Currently, it only supports data element 108. However,
+developers can extend this application to process other data elements. It is capable of decoding LLLVAR data elements encoded with TLV (Tag-Length-Value).
 
 ## System Design
 ISO 8583 Decoder is a Java microservice built using the Spring boot web framework. I used the [Java Fluent Validator](https://github.com/mvallim/java-fluent-validator)
@@ -37,7 +37,7 @@ Now that we have the docker image, let’s run the application. To do so, use th
 ````shell
  docker run -p 8080 iso8583-decoder 
 ````
-After a few seconds, open your web browser to [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html). 
+After a few seconds, open your web browser to [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html).
 You should be able to see the ISO 8583 Decoder Swagger interface and start to play with it.
 
 ### Maven
@@ -54,13 +54,13 @@ You should be able to see the ISO 8583 Decoder Swagger interface and start to pl
 
 ## APIs
 There are two endpoints to chose from. The first one is the `/decoder/de108/file` which is used to upload a `TXT` file with multiple transactions
-to the server. The output is a `JSON` response with the parsed data elements. The second API receives a single transaction as a 
-parameter and outputs its `JSON` representation. Here you can use the web interface to try out the endpoints. 
+to the server. The output is a `JSON` response with the parsed data elements. The second API receives a single transaction as a
+parameter and outputs its `JSON` representation. Here you can use the web interface to try out the endpoints.
 
 ![](doc/web.png)
 
 ### Single Transaction
-#### Example Input: 
+#### Example Input:
 ```shell
 curl -i -XPOST "https://9dhajsauof.execute-api.ca-central-1.amazonaws.com/decoder/de108/transaction?dataElement108=14701600104EMMA0207ANTHONY0306VAUGHN0507MACHIAS0602VI1110174609308702630106BRENDA0209ANNABELLE0307MCGUIRE0505DATIL0602MO111012544681890312030203050204"
 ```
