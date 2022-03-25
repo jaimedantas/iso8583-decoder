@@ -1,7 +1,5 @@
 # ISO 8583 Decoder
-ISO 8583 Decoder is a microservice with two APIs for decoding the Data Element 108 of the ISO 8583 specification. This service is current 
-running [here](https://9dhajsauof.execute-api.ca-central-1.amazonaws.com/swagger-ui.html). Feel free to test this API using the web interface 
-provided.
+ISO 8583 Decoder is a microservice with two APIs for decoding the Data Element 108 of the ISO 8583 specification. 
 
 ## Languages and Frameworks
 - Java 11
@@ -14,8 +12,7 @@ provided.
 - [Java Fluent Validator](https://github.com/mvallim/java-fluent-validator)
 
 ## Documentation
-The documentation for the ISO 8583 Decoder is available online through the Swagger interface 
-[here](https://9dhajsauof.execute-api.ca-central-1.amazonaws.com/swagger-ui.html). Below you can find details on how you can build and run this 
+The documentation for the ISO 8583 Decoder is available online through the Swagger interface at [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html). Below you can find details on how you can build and run this 
 microservice locally.
 
 ## Introduction
@@ -24,14 +21,8 @@ developers can extend this application to process other data elements. It is cap
 
 ## System Design
 ISO 8583 Decoder is a Java microservice built using the Spring boot web framework. I used the [Java Fluent Validator](https://github.com/mvallim/java-fluent-validator)
-library for performing business logic validator. This library was developed by my squad while I was working as a Senior 
-Software Engineer for [Itau Bank](https://en.wikipedia.org/wiki/Ita%C3%BA_Unibanco) and released open source in 2020. I also used the TLV logics 
-of the [Emv QR Code](https://github.com/mvallim/emv-qrcode) which was developed by my team back in 2020, and it is currently running in hundreds of 
-serverless applications and microservices at Itau. We can discuss more detail about them in the interview. This microservice was created using
+library for performing business logic validator. This microservice was created using
 SOLID concepts and DDD. There are 27 unit tests in total, and some of them were created using TDD.
-
-Just as a quick overview about myself, I work with financial protocols, including ISO 8583 and EMV, since 2017. I have a deep
-knowledge of issuer-specific protocols, such as the VISA one used in the ROHO credit card. Feel free to check my [portfolio](https://jaimedantas.com/portfolio.html) and [LinkedIn](https://www.linkedin.com/in/jaimedantas/).
 
 ## Build and Run
 You can run the ISO 8583 Decoder either with Docker or Maven (Maven is a build automation tool used for Java projects).
@@ -43,7 +34,7 @@ Open a terminal and go to the `app` directory with the `Dockerfile`. Now build t
 ````
 Now that we have the docker image, let’s run the application. To do so, use the docker run command:
 ````shell
- docker run -p iso8583-decoder 
+ docker run -p 8080 iso8583-decoder 
 ````
 After a few seconds, open your web browser to [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html). 
 You should be able to see the ISO 8583 Decoder Swagger interface and start to play with it.
@@ -111,26 +102,8 @@ curl -i -XPOST "https://9dhajsauof.execute-api.ca-central-1.amazonaws.com/decode
   ]
 }
 ```
-
-### Testing with AWS
-This microservice was deployed on AWS and it is currently running on the following URL:
-```shell
-https://9dhajsauof.execute-api.ca-central-1.amazonaws.com
-```
-For accessing the WEB interface, you can go to:
-```shell
-https://9dhajsauof.execute-api.ca-central-1.amazonaws.com/swagger-ui.html
-```
-Please note that the API Gateway has absolutely no security features in place, so don't try to break it :)
-
 ### Multiple Transactions Using a Batch File
 Alternatively, you can send a `TXT` file the the `/decoder/de108/file` endpoint and expect a collection of `JSON` objects.
-
-## Message to the Hiring Manager
-I hope you liked the work I did. Honestly, I really enjoyed developing this application, and I am very proud of how it turned out. 
-I am looking forward to meeting you! 
-
-Have a nice day! 
 
 ## Author
 * [Jaime Dantas](https://jaimedantas.com/) - _Initial work, development, test, documentation_
